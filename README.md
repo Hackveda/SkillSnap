@@ -1,62 +1,65 @@
 # SkillSnap
 
-SkillSnap is an isolated intern-testing replica of the Candidate Compass application. It turns a candidate resume and target role into evidence-based skill/experience/project/certification gaps, visual resume review, readiness analytics, preparation-plan recommendations, job matching, and job-specific ATS resume output.
+SkillSnap is an isolated intern-testing application derived from Candidate Compass. Its purpose is to let interns test candidate CRUD, resume extraction, market-driven role requirements, gap analysis, human review, public candidate sharing and job matching without writing to Candidate Compass tables.
 
-## Why this repository exists
+## Isolation from Candidate Compass
 
-The intern environment must not interfere with Candidate Compass. SkillSnap therefore uses its own tables (`skillsnap_*`), its own upload folder, its own PHP session namespace, and its own local configuration file. The committed source contains **no production DB password, OpenAI API key, or admin password**.
+SkillSnap uses:
+
+- its own `skillsnap_*` MySQL tables;
+- its own `skillsnap_admin` PHP session namespace;
+- its own `/skillsnap/uploads` directory;
+- its own `config.local.php`;
+- no committed production DB password, OpenAI API key or admin password.
+
+The original uploaded Candidate Compass source used live fallback credentials, so the SkillSnap replica intentionally removes those fallbacks. Use `config.local.example.php` to configure the test environment.
 
 ## Repository layout
 
 ```text
 SkillSnap/
-├── index.php
-├── app/
-│   ├── bootstrap.php
-│   ├── analysis.php
-│   ├── planning_matching.php
-│   ├── actions.php
-│   └── views/
-│       ├── public.php
-│       ├── admin_head.php
-│       └── admin_script.php
-├── config.local.example.php
-├── skillsnap-share.svg
+├── index.php                         # deployment entry point
+├── working/
+│   └── skillsnap.php                 # readable working intern-test application
+├── config.local.example.php          # copy to config.local.php on server
+├── .htaccess                         # Apache hardening
 ├── uploads/
+│   └── .htaccess                     # blocks direct resume access
 ├── database/
-│   ├── skillsnap_schema.sql
-│   └── copy_job_details.sql
+│   ├── skillsnap_schema.sql          # isolated SkillSnap schema
+│   └── copy_job_details.sql          # optional exact copy of job market data
 ├── presentation/
 │   ├── data-analyst/
 │   │   ├── intern-1-market-intelligence/
 │   │   └── intern-2-analytics-matching/
 │   ├── generative-ai/
 │   └── web-development/
-└── docs/architecture/
+├── docs/architecture/                # architecture diagram goes here later
+└── DEPLOYMENT.md
 ```
 
-## Server deployment: `public_html/skillsnap`
+## Deployment to `public_html/skillsnap`
 
-1. Deploy the repository contents to `public_html/skillsnap`.
-2. Copy `config.local.example.php` to `config.local.php` and set the SkillSnap DB credentials/passwords.
-3. Run `database/skillsnap_schema.sql`.
-4. If you want the same job dataset as Candidate Compass without sharing the table, run `database/copy_job_details.sql` once.
-5. Ensure `public_html/skillsnap/uploads` is writable by PHP.
-6. Open `/skillsnap/` and sign in with the SkillSnap admin password.
-7. For AI analysis, add a separate/restricted OpenAI key to `config.local.php` or `SKILLSNAP_OPENAI_API_KEY`.
+1. Place/clone this repository in `public_html/skillsnap`.
+2. Copy `config.local.example.php` → `config.local.php`.
+3. Set the SkillSnap DB credentials and a new SkillSnap admin password.
+4. Run `database/skillsnap_schema.sql`.
+5. If you need the same job-market dataset as Candidate Compass, run `database/copy_job_details.sql`. It creates an isolated `skillsnap_job_details` copy instead of sharing the original table.
+6. Make `uploads/` writable by PHP.
+7. Open `https://YOUR-DOMAIN/skillsnap/`.
 
-All browser/API URLs are relative (`?action=...`), so deployment under `/skillsnap/` does not require hard-coded route changes.
+All application calls use relative `?action=...` URLs, so `/skillsnap/` does not need hard-coded route changes.
 
 ## Intern ownership
 
 | Intern | Track | Presentation ownership |
 |---|---|---|
-| Data Analyst 1 | Market intelligence | Job data → role requirement aggregation, weights, mentions and descriptions |
-| Data Analyst 2 | Candidate analytics | Evidence scoring, descriptive/diagnostic/predictive/prescriptive analytics and job matching |
-| Generative AI | AI layer | Structured OpenAI responses, evidence classification, visual resume review and ATS resume generation |
-| Web Developer | Application layer | Authentication, CRUD, uploads, AJAX actions, public sharing, UI and security boundaries |
+| Data Analyst 1 | Market intelligence | Job data → target-role requirement aggregation, weights, mentions and descriptions |
+| Data Analyst 2 | Candidate analytics | Evidence scoring, gap prioritization and company/job matching |
+| Generative AI | AI layer | Structured AI evidence analysis, visual resume-review design and ATS-generation design |
+| Web Developer | Application layer | Authentication, CRUD, uploads, AJAX actions, public sharing and security boundaries |
 
-The `presentation/` folders contain curated code extracts from the working app so each intern can explain a focused slice without editing the working copy.
+Each presentation folder has a focused README plus a code extract. Interns should present those extracts, while `/working/skillsnap.php` remains the common working application.
 
 ## Core data flow
 
@@ -65,21 +68,21 @@ skillsnap_job_details
         ↓
 Target-role requirement aggregation
         ↓
-Resume extraction + keyword/AI evidence classification
+Resume extraction and evidence matching
         ↓
 Existing / Partial / Missing / Not Required
         ↓
-Readiness analytics + visual resume analysis
+Candidate gap/readiness view
         ↓
-Preparation prescription + company/job matching
+Human review overrides
         ↓
-Shared candidate review + job-specific ATS resume
+Company/job matching + shared candidate profile
 ```
 
-## Important isolation rule
+## Full replica versus presentation code
 
-Do not change SkillSnap SQL back to `candidates`, `candidate_requirements`, `candidate_activity`, or `job_details`. Those names belong to the original environment. SkillSnap intentionally writes only to `skillsnap_*` tables.
+The working training application in this repository is intentionally readable and isolated. The full SkillSnap export prepared from the attached Candidate Compass source retains the richer Candidate Compass flows, including the AI/visual/plan/ATS functions, with SkillSnap branding and isolated table names. The presentation folders are smaller teaching extracts and must not replace the working application.
 
 ## Architecture map
 
-A final visual architecture map is intentionally deferred until the server build is validated. Add it under `docs/architecture/` once the live SkillSnap flow has been tested end-to-end.
+The final architecture diagram will be added under `docs/architecture/` after the server deployment is validated end-to-end.

@@ -1,0 +1,7 @@
+config.local.php
+uploads/*
+!uploads/.htaccess
+!uploads/.gitkeep
+tmp/
+*.log
+.DS_Store

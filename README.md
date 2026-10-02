@@ -2,7 +2,7 @@
 
 SkillSnap is an intern presentation project focused on understanding how candidate data, resume evidence, market requirements, analytics, AI-assisted evaluation, job matching, and web application components can be combined into a career-readiness platform.
 
-The project is derived conceptually from Candidate Compass, but SkillSnap is maintained as an isolated learning environment with its own application namespace, data tables, upload area, configuration boundary, and presentation modules.
+SkillSnap is maintained as an independent learning environment with its own application namespace, data tables, upload area, configuration boundary, and presentation modules.
 
 ## Project Objective
 
@@ -148,7 +148,7 @@ SkillSnap/
 
 ## Database Design
 
-SkillSnap uses a separate `skillsnap_*` table namespace so the project remains independent from Candidate Compass.
+SkillSnap uses a dedicated `skillsnap_*` table namespace.
 
 The main logical data areas are:
 
@@ -161,13 +161,7 @@ The main logical data areas are:
 - Match processing queue
 - Job-market source data
 
-This separation also makes the database design easier to explain during the internship presentation because each table belongs to a clearly defined application responsibility.
-
-## Separation from Candidate Compass
-
-SkillSnap is intentionally isolated from the original Candidate Compass environment. Its candidate data, requirement analysis, activity history, matching history, job data, PHP session namespace, uploads, and local configuration are independent.
-
-This design allows SkillSnap to function as a learning and presentation application without changing Candidate Compass records.
+This separation makes the database design easier to explain during the internship presentation because each table belongs to a clearly defined application responsibility.
 
 ## Learning Outcomes Demonstrated
 

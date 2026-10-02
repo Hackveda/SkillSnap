@@ -8,5 +8,6 @@ CREATE TABLE skillsnap_job_details LIKE job_details;
 INSERT INTO skillsnap_job_details SELECT * FROM job_details;
 SET FOREIGN_KEY_CHECKS=1;
 
+-- Validation
 SELECT COUNT(*) AS candidate_compass_jobs FROM job_details;
 SELECT COUNT(*) AS skillsnap_jobs FROM skillsnap_job_details;

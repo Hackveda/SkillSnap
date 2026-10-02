@@ -1,6 +1,7 @@
 -- SkillSnap isolated schema
--- Designed for an intern test environment that must not write to Candidate Compass tables.
--- Run in the same MySQL database or in a separate test database.
+-- Designed for a SkillSnap test environment that must not write to Candidate Compass tables.
+-- Run this in the SAME MySQL database only if you want to reuse the same credentials with isolated table names.
+-- You may also run it in a separate database.
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS=0;
@@ -157,6 +158,9 @@ CREATE TABLE IF NOT EXISTS skillsnap_activity (
   CONSTRAINT fk_ss_activity_candidate FOREIGN KEY(candidate_id) REFERENCES skillsnap_candidates(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Minimal isolated job table. If Candidate Compass already has job_details, use
+-- database/copy_job_details.sql AFTER this file to replace this minimal table
+-- with an exact structure-and-data copy.
 CREATE TABLE IF NOT EXISTS skillsnap_job_details (
   ID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   Title VARCHAR(512) NULL,

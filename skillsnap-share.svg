@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#f8fafc"/><rect x="70" y="70" width="1060" height="490" rx="38" fill="#ffffff" stroke="#dbe3ef"/>
+<circle cx="155" cy="165" r="28" fill="#2563eb"/><text x="210" y="182" font-family="Arial,sans-serif" font-weight="700" font-size="54" fill="#0f172a">SkillSnap</text>
+<text x="120" y="310" font-family="Arial,sans-serif" font-weight="700" font-size="48" fill="#0f172a">Resume evidence → role gaps → action</text>
+<text x="120" y="385" font-family="Arial,sans-serif" font-size="31" fill="#475569">Intern testing environment for candidate intelligence</text>
+<rect x="120" y="445" width="305" height="58" rx="29" fill="#eff6ff"/><text x="155" y="484" font-family="Arial,sans-serif" font-size="25" fill="#1d4ed8">Isolated training build</text>
+</svg>

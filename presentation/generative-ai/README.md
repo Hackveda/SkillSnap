@@ -1,25 +1,14 @@
-# Generative AI Intern — Evidence & Resume Intelligence
+# Generative AI Intern — AI Evidence & Resume Intelligence
 
 ## Presentation question
-Where is Generative AI used in SkillSnap, and how is it constrained?
+Where is Generative AI used, and how does SkillSnap constrain it?
 
-## Own these concepts
-- OpenAI Responses API with structured JSON Schema output.
-- Evidence-grounded requirement classification: Existing / Partial / Missing.
-- Confidence, evidence and reason fields.
-- Visual resume review from rendered resume pages.
-- Reviewer personas: recruiter, screener, hiring manager, technical interviewer and senior leader.
-- ATS-oriented resume rewriting for a selected job.
-- Human review overrides AI output.
+## Explain
+1. OpenAI Responses API is called with strict JSON Schemas.
+2. Requirement analysis classifies each requirement as Existing / Partial / Missing with confidence, evidence and reason.
+3. The visual-review flow renders resume pages and asks the model to evaluate scanability, hierarchy, acceptance/rejection signals and reviewer personas.
+4. ATS generation rewrites/reorders supported evidence for a selected job.
+5. Human `review_status` overrides AI and keyword output.
 
-## Important quality rule
-AI must not invent employers, dates, degrees, certifications, years of experience or delivered results. Unsupported target-job requirements should remain gaps/development priorities.
-
-## Demo flow
-1. Show the schema expected from the model.
-2. Show one requirement and its resume evidence.
-3. Explain why structured output is easier to validate/store than free-form text.
-4. Explain visual resume analysis separately from factual resume evidence.
-5. Explain how a human review becomes the final authority.
-
-Use `presentation.php` for the code walkthrough. The full deployable export contains the richer AI/vision/ATS implementation from Candidate Compass, renamed and isolated for SkillSnap.
+## Safety/quality point
+The committed code never contains the API key. Keep AI outputs evidence-grounded and do not treat heuristic percentages as guarantees.

@@ -1,0 +1,38 @@
+flowchart TD
+    Browser["User Browser"]
+    DB[("MySQL Database")]
+    EXT["External Services"]
+    app_actions_php_cc6eb6["app/actions.php"]
+    app_actions_php_cc6eb6 --> DB
+    app_actions_php_cc6eb6 --> EXT
+    app_analysis_php_59023c["app/analysis.php"]
+    app_analysis_php_59023c --> DB
+    app_analysis_php_59023c --> EXT
+    app_bootstrap_php_52787c["app/bootstrap.php"]
+    Browser --> app_bootstrap_php_52787c
+    app_bootstrap_php_52787c --> DB
+    app_bootstrap_php_52787c --> EXT
+    app_planning_matching_php_0dcc8e["app/planning_matching.php"]
+    app_planning_matching_php_0dcc8e --> DB
+    app_planning_matching_php_0dcc8e --> EXT
+    app_views_admin_head_php_9666df["app/views/admin_head.php"]
+    app_views_admin_head_php_9666df --> DB
+    app_views_admin_script_php_ffe5bf["app/views/admin_script.php"]
+    app_views_admin_script_php_ffe5bf --> DB
+    app_views_admin_script_php_ffe5bf --> EXT
+    app_views_public_php_e56418["app/views/public.php"]
+    app_views_public_php_e56418 --> DB
+    config_local_example_php_676f76["config.local.example.php"]
+    config_local_example_php_676f76 --> EXT
+    config_local_php_66fd82["config.local.php"]
+    config_local_php_66fd82 --> EXT
+    presentation_data_analyst_intern_1_market_intelligence_presentation_php_1f9ab7["presentation/data-analyst/intern-1-market-intelligence/presentation.php"]
+    presentation_data_analyst_intern_1_market_intelligence_presentation_php_1f9ab7 --> DB
+    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b["presentation/data-analyst/intern-2-analytics-matching/presentation.php"]
+    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b --> DB
+    presentation_generative_ai_presentation_php_c93ab3["presentation/generative-ai/presentation.php"]
+    presentation_generative_ai_presentation_php_c93ab3 --> DB
+    presentation_generative_ai_presentation_php_c93ab3 --> EXT
+    presentation_web_development_presentation_php_78a46a["presentation/web-development/presentation.php"]
+    presentation_web_development_presentation_php_78a46a --> DB
+    presentation_web_development_presentation_php_78a46a --> EXT

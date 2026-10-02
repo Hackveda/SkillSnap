@@ -1,25 +1,15 @@
 # Web Developer Intern — PHP Application, AJAX & Sharing
 
 ## Presentation question
-How does SkillSnap securely support private admin work and a limited public candidate view?
+How does one PHP application securely support admin work and a limited public candidate view?
 
-## Own these concepts
-- PHP session authentication for admin actions.
-- PDO prepared statements for candidate CRUD.
-- Resume upload validation and isolated `/skillsnap/uploads` storage.
-- Relative AJAX/API URLs so deployment under `public_html/skillsnap` needs no route rewrite.
-- Random share tokens for candidate-facing links.
-- Public payloads expose only the fields required for review.
-- Public requirement updates verify both requirement ID and share token.
-- HTML output escaping with `htmlspecialchars`.
+## Explain
+1. Session authentication protects admin actions.
+2. CRUD and analysis actions use prepared PDO statements and JSON responses.
+3. Resume uploads are stored under `/skillsnap/uploads`; direct web access is blocked by `.htaccess`.
+4. A random share token enables a limited public payload instead of exposing the full candidate row.
+5. Public requirement updates validate both requirement ID and share token.
+6. Relative AJAX URLs let the app work under `public_html/skillsnap` without hard-coded routes.
 
-## Demo flow
-1. Login.
-2. Create/save a candidate.
-3. Upload a resume.
-4. Run role analysis.
-5. Create a share link.
-6. Open the public profile in another tab.
-7. Explain why SkillSnap uses separate table names, session name and upload folder.
-
-Use `presentation.php` during the code walkthrough. The working source remains in `/working/skillsnap.php`.
+## Demo
+Create candidate → upload resume → share profile → update one requirement in the public view.

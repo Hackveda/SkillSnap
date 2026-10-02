@@ -1,22 +1,14 @@
-# Data Analyst Intern 2 — Candidate Analytics & Job Matching
+# Data Analyst Intern 2 — Candidate Analytics & Matching
 
 ## Presentation question
-How does SkillSnap convert requirement evidence into candidate readiness and job-match scores?
+How does SkillSnap turn evidence statuses into actionable candidate and job-match analytics?
 
-## Own these concepts
-- Final status precedence: manual review → AI status → automatic status.
-- Existing = full credit, Partial = half credit, Missing = zero credit.
-- Not Required is excluded from the denominator.
-- Weighted category match for skills, experience, projects and certifications.
-- Gap prioritization using requirement weight and frequency.
-- Job-match weighting: Skills 40%, Experience 30%, Projects 20%, Certifications 10%, renormalized when a category is absent.
-- These scores are decision-support estimates, not hiring guarantees.
+## Explain
+1. Existing = full credit, Partial = half credit, Missing = zero; Not Required is excluded.
+2. Requirement weights drive category and total match calculations.
+3. `candidate_analytics()` produces descriptive, diagnostic, predictive-estimate and prescriptive outputs.
+4. Company matching scores each job by Skills 40%, Experience 30%, Projects 20%, Certifications 10% (renormalized when a group is absent).
+5. These are decision-support estimates, not trained hiring probabilities.
 
-## Demo flow
-1. Open one candidate.
-2. Change a requirement from Missing to Existing.
-3. Show the change in weighted match.
-4. Compare the candidate against multiple job rows.
-5. Explain why the same candidate can score differently for two companies/jobs.
-
-Use `presentation.php` for the code walkthrough.
+## Demo
+Change one requirement from Missing → Existing and show how readiness/job matching changes.

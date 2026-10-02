@@ -1,0 +1,481 @@
+{
+    "generated_at": "2026-10-02 07:03:33",
+    "target_path": "skillsnap",
+    "target_root": "/home3/hackveda/public_html/skillsnap",
+    "summary": {
+        "files": 14,
+        "tables": [
+            "SkillSnap",
+            "rejection",
+            "resume",
+            "shared",
+            "skillsnap_activity",
+            "skillsnap_candidate_requirements",
+            "skillsnap_candidates",
+            "skillsnap_company_match_cache",
+            "skillsnap_company_match_jobs",
+            "skillsnap_company_match_queue",
+            "skillsnap_company_match_runs",
+            "skillsnap_job_details",
+            "the"
+        ],
+        "apis": [
+            "Mail/SMTP",
+            "OpenAI",
+            "cURL External API"
+        ],
+        "includes_count": 0,
+        "ajax_count": 2,
+        "forms_count": 1,
+        "redirects_count": 0,
+        "session_files": 2
+    },
+    "files": [
+        {
+            "id": 1,
+            "file": "app/actions.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "skillsnap_candidates",
+                "skillsnap_candidate_requirements",
+                "skillsnap_job_details"
+            ],
+            "external_urls": [],
+            "api_keywords": [
+                "OpenAI"
+            ],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": true,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": true,
+            "uses_cron_hint": false,
+            "line_count": 128,
+            "size_kb": 15.1300000000000007815970093361102044582366943359375
+        },
+        {
+            "id": 2,
+            "file": "app/analysis.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "skillsnap_job_details",
+                "skillsnap_candidates",
+                "rejection",
+                "skillsnap_candidate_requirements"
+            ],
+            "external_urls": [
+                "https://api.openai.com/v1/responses"
+            ],
+            "api_keywords": [
+                "OpenAI",
+                "cURL External API"
+            ],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": true,
+            "uses_mysqli": false,
+            "uses_curl": true,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": true,
+            "line_count": 357,
+            "size_kb": 28.730000000000000426325641456060111522674560546875
+        },
+        {
+            "id": 3,
+            "file": "app/bootstrap.php",
+            "includes": [],
+            "form_actions": [
+                "?action=admin_login"
+            ],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "skillsnap_job_details",
+                "skillsnap_candidates",
+                "skillsnap_candidate_requirements",
+                "skillsnap_activity",
+                "skillsnap_company_match_cache",
+                "skillsnap_company_match_jobs",
+                "skillsnap_company_match_runs",
+                "skillsnap_company_match_queue"
+            ],
+            "external_urls": [
+                "https://thetalentgrid.in/plans/",
+                "https://www.thetalentgrid.co.in"
+            ],
+            "api_keywords": [
+                "OpenAI",
+                "Mail/SMTP"
+            ],
+            "uses_session": true,
+            "uses_mysql": true,
+            "uses_pdo": true,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": true,
+            "uses_file_upload": false,
+            "uses_cron_hint": true,
+            "line_count": 313,
+            "size_kb": 22.9200000000000017053025658242404460906982421875
+        },
+        {
+            "id": 4,
+            "file": "app/planning_matching.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "the",
+                "skillsnap_candidates",
+                "skillsnap_candidate_requirements",
+                "skillsnap_job_details",
+                "skillsnap_company_match_runs",
+                "skillsnap_company_match_queue",
+                "skillsnap_company_match_cache"
+            ],
+            "external_urls": [],
+            "api_keywords": [
+                "OpenAI"
+            ],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": true,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": true,
+            "line_count": 344,
+            "size_kb": 39.57000000000000028421709430404007434844970703125
+        },
+        {
+            "id": 5,
+            "file": "app/views/admin_head.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "resume"
+            ],
+            "external_urls": [
+                "https://cdn.datatables.net/1.13.10/css/jquery.dataTables.min.css",
+                "https://code.jquery.com/jquery-3.7.1.min.js",
+                "https://cdn.datatables.net/1.13.10/js/jquery.dataTables.min.js",
+                "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+            ],
+            "api_keywords": [],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": false,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": false,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 363,
+            "size_kb": 28.230000000000000426325641456060111522674560546875
+        },
+        {
+            "id": 6,
+            "file": "app/views/admin_script.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "shared",
+                "the"
+            ],
+            "external_urls": [
+                "https://thetalentgrid.in/plans/"
+            ],
+            "api_keywords": [
+                "OpenAI"
+            ],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": false,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 449,
+            "size_kb": 37.97999999999999687361196265555918216705322265625
+        },
+        {
+            "id": 7,
+            "file": "app/views/public.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [
+                "?action=public_requirement_update",
+                "?action=candidate_review_submit"
+            ],
+            "redirects": [],
+            "sql_tables": [
+                "the",
+                "SkillSnap"
+            ],
+            "external_urls": [
+                "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+                "https://thetalentgrid.in/plans/"
+            ],
+            "api_keywords": [],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": false,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": false,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 432,
+            "size_kb": 48.97999999999999687361196265555918216705322265625
+        },
+        {
+            "id": 8,
+            "file": "config.local.example.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [],
+            "external_urls": [
+                "https://thetalentgrid.in/plans/",
+                "https://www.thetalentgrid.co.in"
+            ],
+            "api_keywords": [
+                "OpenAI"
+            ],
+            "uses_session": false,
+            "uses_mysql": false,
+            "uses_pdo": false,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 29,
+            "size_kb": 1.149999999999999911182158029987476766109466552734375
+        },
+        {
+            "id": 9,
+            "file": "config.local.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [],
+            "external_urls": [
+                "https://thetalentgrid.in/plans/",
+                "https://www.thetalentgrid.co.in"
+            ],
+            "api_keywords": [
+                "OpenAI"
+            ],
+            "uses_session": false,
+            "uses_mysql": false,
+            "uses_pdo": false,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 29,
+            "size_kb": 1.29000000000000003552713678800500929355621337890625
+        },
+        {
+            "id": 10,
+            "file": "index.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [],
+            "external_urls": [],
+            "api_keywords": [],
+            "uses_session": false,
+            "uses_mysql": false,
+            "uses_pdo": false,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": false,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 15,
+            "size_kb": 0.450000000000000011102230246251565404236316680908203125
+        },
+        {
+            "id": 11,
+            "file": "presentation/data-analyst/intern-1-market-intelligence/presentation.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "skillsnap_job_details"
+            ],
+            "external_urls": [],
+            "api_keywords": [],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": false,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": false,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 72,
+            "size_kb": 3.359999999999999875655021241982467472553253173828125
+        },
+        {
+            "id": 12,
+            "file": "presentation/data-analyst/intern-2-analytics-matching/presentation.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "skillsnap_candidates",
+                "skillsnap_candidate_requirements",
+                "skillsnap_job_details"
+            ],
+            "external_urls": [],
+            "api_keywords": [],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": true,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": false,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 76,
+            "size_kb": 9.410000000000000142108547152020037174224853515625
+        },
+        {
+            "id": 13,
+            "file": "presentation/generative-ai/presentation.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "skillsnap_candidates",
+                "rejection",
+                "skillsnap_job_details"
+            ],
+            "external_urls": [
+                "https://api.openai.com/v1/responses"
+            ],
+            "api_keywords": [
+                "OpenAI",
+                "cURL External API"
+            ],
+            "uses_session": false,
+            "uses_mysql": true,
+            "uses_pdo": true,
+            "uses_mysqli": false,
+            "uses_curl": true,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": true,
+            "line_count": 128,
+            "size_kb": 17.71000000000000085265128291212022304534912109375
+        },
+        {
+            "id": 14,
+            "file": "presentation/web-development/presentation.php",
+            "includes": [],
+            "form_actions": [],
+            "ajax_calls": [],
+            "redirects": [],
+            "sql_tables": [
+                "skillsnap_candidates",
+                "skillsnap_candidate_requirements"
+            ],
+            "external_urls": [],
+            "api_keywords": [
+                "OpenAI"
+            ],
+            "uses_session": true,
+            "uses_mysql": true,
+            "uses_pdo": true,
+            "uses_mysqli": false,
+            "uses_curl": false,
+            "uses_razorpay": false,
+            "uses_openai": true,
+            "uses_whatsapp": false,
+            "uses_google": false,
+            "uses_mail": false,
+            "uses_file_upload": false,
+            "uses_cron_hint": false,
+            "line_count": 69,
+            "size_kb": 5.20000000000000017763568394002504646778106689453125
+        }
+    ]
+}

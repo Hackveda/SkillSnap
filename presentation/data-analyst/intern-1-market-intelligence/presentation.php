@@ -1,93 +1,71 @@
 <?php
-/**
- * SkillSnap presentation extract — Data Analyst Intern 1.
- * Topic: market intelligence and target-role requirement aggregation.
- * This file is for explanation only; working source is /working/skillsnap.php.
+/** Data Analyst Intern 1: market-intelligence and requirement aggregation.
+ * Presentation extract only. Source of truth: /index.php
  */
 
-function normalize_term(string $value): string {
-    $value = mb_strtolower(trim(preg_replace('/\s+/u', ' ', $value)), 'UTF-8');
-    $value = preg_replace('/[^\pL\pN+#.\/ -]+/u', ' ', $value);
-    return trim(preg_replace('/\s+/u', ' ', $value));
+function decode_json($txt){ $j=json_decode((string)$txt,true); return is_array($j)?$j:[]; }
+
+function group_aliases($g){
+  return [
+    'skills'=>['skills','Skills','skill','Skill'],
+    'experience'=>['experience','Experience','experiences','Experiences'],
+    'projects'=>['projects','Projects','project','Project'],
+    'certificates'=>['certificates','Certificates','certificate','Certificate','certifications','Certifications']
+  ][$g] ?? [$g];
 }
 
-function weighted_group(array $parsedJob, string $group): array {
-    $items = $parsedJob[$group] ?? [];
-    if ($group === 'certificates' && !$items) {
-        $items = $parsedJob['certifications'] ?? [];
-    }
-
-    $result = [];
-    foreach ($items as $item) {
-        if (is_string($item)) {
-            $term = trim($item);
-            $weight = 1.0;
-        } elseif (is_array($item)) {
-            $term = trim((string)($item['term'] ?? $item['name'] ?? $item['title'] ?? ''));
-            $weight = is_numeric($item['weight'] ?? null) ? (float)$item['weight'] : 1.0;
-        } else {
-            continue;
-        }
-        if ($term !== '') $result[] = ['term' => $term, 'weight' => $weight];
-    }
-    return $result;
+function extract_weighted_group($json,$group){
+  $j=is_array($json)?$json:decode_json($json); $items=null;
+  foreach(group_aliases($group) as $k){ if(array_key_exists($k,$j)){ $items=$j[$k]; break; } }
+  if($items===null || !is_array($items)) return [];
+  $out=[];
+  foreach($items as $it){
+    if(is_string($it)){ $term=norm_space($it); $w=1; }
+    elseif(is_array($it)){ $term=norm_space($it['term']??$it['name']??$it['title']??''); $w=is_numeric($it['weight']??null)?(float)$it['weight']:1; }
+    else continue;
+    if($term!=='') $out[]=['term'=>$term,'weight'=>$w];
+  }
+  return $out;
 }
 
-function aggregate_role_requirements(PDO $pdo, string $role, string $location = ''): array {
-    $groups = ['skills', 'experience', 'projects', 'certificates'];
-    $aggregate = array_fill_keys($groups, []);
-
-    $sql = "SELECT Title, Company, Location, parsed_json, skill_desc
-            FROM skillsnap_job_details
-            WHERE analysed=1 AND (Title LIKE ? OR parsed_json LIKE ?)";
-    $args = ["%{$role}%", "%{$role}%"];
-    if ($location !== '') {
-        $sql .= " AND Location LIKE ?";
-        $args[] = "%{$location}%";
-    }
-    $sql .= " ORDER BY ID DESC LIMIT 5000";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($args);
-    $jobsScanned = 0;
-
-    while ($job = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $jobsScanned++;
-        $parsed = json_decode((string)$job['parsed_json'], true) ?: [];
-        $seenInThisJob = [];
-
-        foreach ($groups as $group) {
-            foreach (weighted_group($parsed, $group) as $item) {
-                $key = normalize_term($item['term']);
-                if ($key === '' || isset($seenInThisJob[$group][$key])) continue;
-                $seenInThisJob[$group][$key] = true;
-
-                if (!isset($aggregate[$group][$key])) {
-                    $aggregate[$group][$key] = [
-                        'term' => $item['term'],
-                        'weight' => 0.0,
-                        'mentions' => 0
-                    ];
-                }
-                $aggregate[$group][$key]['weight'] += $item['weight'];
-                $aggregate[$group][$key]['mentions']++;
-            }
-        }
-    }
-
-    foreach ($groups as $group) {
-        $rows = array_values($aggregate[$group]);
-        usort($rows, fn($a, $b) =>
-            ($b['weight'] <=> $a['weight']) ?: ($b['mentions'] <=> $a['mentions'])
-        );
-        $aggregate[$group] = array_slice($rows, 0, 30);
-    }
-
-    return ['jobs_scanned' => $jobsScanned, 'groups' => $aggregate];
+function extract_desc_group($json,$group){
+  $j=is_array($json)?$json:decode_json($json); $items=null;
+  foreach(group_aliases($group) as $k){ if(array_key_exists($k,$j)){ $items=$j[$k]; break; } }
+  if(!is_array($items)) return [];
+  $out=[];
+  foreach($items as $it){
+    if(!is_array($it)) continue;
+    $term=norm_space($it['term']??''); $desc=trim((string)($it['desc']??''));
+    if($term!=='') $out[norm_key($term)]=['term'=>$term,'desc'=>$desc];
+  }
+  return $out;
 }
 
-/* Presentation takeaway:
- * The benchmark is derived from the job market, not from a hard-coded course syllabus.
- * A requirement becomes more important when it carries more accumulated weight and/or
- * appears across more matching jobs.
- */
+function role_requirements($role,$location='',$limitRows=5000,$limitEach=100){
+  $role=trim($role); if($role==='') return ['groups'=>['skills'=>[],'experience'=>[],'projects'=>[],'certificates'=>[]],'jobs_scanned'=>0];
+  $where=['analysed=1','(`Title` LIKE :role OR `parsed_json` LIKE :role2)'];
+  $par=[':role'=>'%'.$role.'%',':role2'=>'%'.$role.'%'];
+  if($location!==''){ $where[]='`Location` LIKE :loc'; $par[':loc']='%'.$location.'%'; }
+  $sql='SELECT `Title`,`Company`,`Location`,`parsed_json`,`skill_desc` FROM skillsnap_job_details WHERE '.implode(' AND ',$where).' ORDER BY `ID` DESC LIMIT '.max(1,min(20000,$limitRows));
+  $st=db()->prepare($sql); $st->execute($par);
+  $agg=['skills'=>[],'experience'=>[],'projects'=>[],'certificates'=>[]]; $scanned=0;
+  while($r=$st->fetch()){
+    $scanned++; $pj=decode_json($r['parsed_json']??''); $sd=decode_json($r['skill_desc']??'');
+    foreach(array_keys($agg) as $g){
+      $descMap=extract_desc_group($sd,$g); $seen=[];
+      foreach(extract_weighted_group($pj,$g) as $it){
+        $key=norm_key($it['term']); if($key===''||isset($seen[$key])) continue; $seen[$key]=1;
+        if(!isset($agg[$g][$key])) $agg[$g][$key]=['term'=>$it['term'],'description'=>'','weight'=>0.0,'mentions'=>0];
+        $agg[$g][$key]['weight']+=(float)$it['weight']; $agg[$g][$key]['mentions']++;
+        if($agg[$g][$key]['description']==='' && isset($descMap[$key])) $agg[$g][$key]['description']=$descMap[$key]['desc'];
+      }
+    }
+  }
+  $groups=[];
+  foreach($agg as $g=>$map){
+    $rows=array_values($map);
+    usort($rows,function($a,$b){ $x=$b['weight']<=>$a['weight']; return $x?:($b['mentions']<=>$a['mentions']); });
+    $groups[$g]=array_slice($rows,0,$limitEach);
+  }
+  return ['groups'=>$groups,'jobs_scanned'=>$scanned];
+}

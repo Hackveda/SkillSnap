@@ -6,6 +6,6 @@ DirectoryIndex index.php
   Header always set Referrer-Policy "same-origin"
 </IfModule>
 
-<FilesMatch "^(config\.local\.php|.*\.sql)$">
+<FilesMatch "^(config\.local\.php|.*\.sql|.*\.md)$">
   Require all denied
 </FilesMatch>

@@ -1,191 +1,76 @@
 # SkillSnap
 
-SkillSnap is an intern presentation project focused on understanding how candidate data, resume evidence, market requirements, analytics, AI-assisted evaluation, job matching, and web application components can be combined into a career-readiness platform.
+SkillSnap is an isolated intern-testing replica of the Candidate Compass application. It turns a candidate resume and target role into evidence-based skill/experience/project/certification gaps, visual resume review, readiness analytics, preparation-plan recommendations, job matching, and job-specific ATS resume output.
 
-SkillSnap is maintained as an independent learning environment with its own application namespace, data tables, upload area, configuration boundary, and presentation modules.
+## Why this repository exists
 
-## Project Objective
+The intern environment must not interfere with Candidate Compass. SkillSnap therefore uses its own tables (`skillsnap_*`), its own upload folder, its own PHP session namespace, and its own local configuration file. The committed source contains **no production DB password, OpenAI API key, or admin password**.
 
-The central problem addressed by SkillSnap is:
-
-> How can a candidate's resume be compared with real job-market requirements to identify evidence, gaps, readiness, and suitable opportunities?
-
-The system connects four technical perspectives:
-
-1. **Data Analysis** — understanding job-market demand and candidate gaps.
-2. **Generative AI** — evaluating evidence and producing structured insights.
-3. **Web Development** — building the application workflow and user experience.
-4. **Database Design** — maintaining candidate, requirement, review, activity, and matching data.
-
-## Project Concept
-
-SkillSnap follows an evidence-oriented career analysis flow:
-
-```text
-Job Market Data
-      ↓
-Target Role Requirements
-      ↓
-Candidate Resume & Profile
-      ↓
-Evidence Classification
-      ↓
-Existing / Partial / Missing / Not Required
-      ↓
-Candidate Gap & Readiness Analytics
-      ↓
-Job / Company Matching
-      ↓
-Candidate Review & Career Insights
-```
-
-This structure helps separate three different questions:
-
-- **What does the market require?**
-- **What evidence does the candidate currently demonstrate?**
-- **Where is the gap between the two?**
-
-## Major Functional Areas
-
-### Candidate Profile Management
-
-The application maintains candidate information such as current role, target role, target location, compensation details, notice period, stage, notes, and resume metadata.
-
-### Resume Processing
-
-SkillSnap supports resume text extraction from PDF, DOCX, and TXT files. Extracted resume content becomes the evidence source for subsequent analysis.
-
-### Market Requirement Analysis
-
-Job data is analysed to identify recurring requirements for a selected target role. Requirements are grouped into:
-
-- Skills
-- Experience
-- Projects
-- Certifications
-
-Frequency and weight information help represent relative market demand.
-
-### Evidence Classification
-
-Candidate evidence is evaluated against role requirements and represented using four states:
-
-- **Existing** — credible evidence is present.
-- **Partial** — related or incomplete evidence is present.
-- **Missing** — sufficient evidence is not present.
-- **Not Required** — the requirement is excluded through review.
-
-The application also supports human review overrides so automated analysis is not treated as the final authority.
-
-### Candidate Analytics
-
-The analytics layer converts requirement-level evidence into higher-level information such as:
-
-- Category-level match
-- Weighted match
-- Evidence completeness
-- Important missing requirements
-- Gap prioritisation
-- Readiness indicators
-
-The purpose of these metrics is decision support rather than guaranteed hiring prediction.
-
-### Company and Job Matching
-
-Candidate evidence is compared with individual job requirements across skills, experience, projects, and certifications. Matching results provide a more specific view than target-role analysis because they compare the candidate with individual opportunities.
-
-### Generative AI Layer
-
-The Generative AI component demonstrates structured AI-assisted analysis for areas such as:
-
-- Resume evidence classification
-- Requirement-level reasoning
-- Resume presentation review
-- Reviewer-perspective analysis
-- Job-specific resume adaptation
-
-Structured outputs are used so AI responses can be stored and interpreted consistently by the application.
-
-### Candidate Review Experience
-
-A shareable candidate profile presents evidence, gaps, analytics, and matching information in a review-friendly format. Human corrections and additional evidence can become part of the final candidate assessment.
-
-## Intern Presentation Ownership
-
-The project is divided according to the four internship focus areas so that each intern can explain a meaningful subsystem while still understanding the complete application.
-
-| Intern | Track | Presentation Focus |
-|---|---|---|
-| Data Analyst 1 | Market Intelligence | Job data, target-role aggregation, requirement frequency, weights, mentions, and market-demand interpretation |
-| Data Analyst 2 | Candidate Analytics | Evidence scoring, category match, gap prioritisation, readiness analytics, and job-matching logic |
-| Generative AI Intern | Generative AI | Structured AI outputs, requirement classification, evidence reasoning, visual resume review, and ATS-oriented resume generation |
-| Web Development Intern | Web Development | PHP application flow, authentication, CRUD, resume upload, AJAX interaction, candidate sharing, and UI integration |
-
-The presentation folders contain focused code extracts corresponding to these responsibilities, while the working application represents the integrated system.
-
-## Repository Structure
+## Repository layout
 
 ```text
 SkillSnap/
-├── index.php
-├── working/
-│   └── skillsnap.php
+├── index.php                         # Complete working SkillSnap application
+├── config.local.example.php          # Copy to config.local.php on the server
+├── skillsnap-share.svg               # Default social/share image
+├── uploads/                           # Resume files (blocked from direct web access)
 ├── database/
-│   ├── skillsnap_schema.sql
-│   └── copy_job_details.sql
+│   ├── skillsnap_schema.sql           # Isolated SkillSnap tables
+│   └── copy_job_details.sql           # Optional exact copy of Candidate Compass job_details
 ├── presentation/
 │   ├── data-analyst/
 │   │   ├── intern-1-market-intelligence/
 │   │   └── intern-2-analytics-matching/
 │   ├── generative-ai/
 │   └── web-development/
-├── docs/
-│   └── architecture/
-├── uploads/
-├── config.local.example.php
-└── DEPLOYMENT.md
+└── docs/architecture/                 # Architecture map will be added after server validation
 ```
 
-## Database Design
+## Server deployment: `public_html/skillsnap`
 
-SkillSnap uses a dedicated `skillsnap_*` table namespace.
+1. Copy the repository contents to `public_html/skillsnap` (or deploy this repo there).
+2. Copy `config.local.example.php` to `config.local.php` and set the SkillSnap DB credentials/passwords.
+3. Run `database/skillsnap_schema.sql`.
+4. If you want the same job dataset as Candidate Compass without sharing the table, run `database/copy_job_details.sql` once.
+5. Ensure `public_html/skillsnap/uploads` is writable by PHP (typically 0750/0755 depending on hosting).
+6. Open `/skillsnap/` and sign in with the SkillSnap admin password.
+7. For AI analysis, add a **separate/restricted** OpenAI key to `config.local.php` or `SKILLSNAP_OPENAI_API_KEY`.
 
-The main logical data areas are:
+All browser/API URLs in the application are relative (`?action=...`), so deployment under `/skillsnap/` does not require hard-coded path changes.
 
-- Candidate profiles
-- Candidate requirements
-- Candidate review activity
-- Company-match cache
-- Company-match jobs
-- Match execution history
-- Match processing queue
-- Job-market source data
+## Intern ownership
 
-This separation makes the database design easier to explain during the internship presentation because each table belongs to a clearly defined application responsibility.
+| Intern | Track | Presentation ownership |
+|---|---|---|
+| Data Analyst 1 | Market intelligence | Job data → role requirement aggregation, weights, mentions and descriptions |
+| Data Analyst 2 | Candidate analytics | Evidence scoring, descriptive/diagnostic/predictive/prescriptive analytics and job matching |
+| Generative AI | AI layer | Structured OpenAI responses, evidence classification, visual resume review and ATS resume generation |
+| Web Developer | Application layer | Authentication, CRUD, uploads, AJAX actions, public sharing, UI and security boundaries |
 
-## Learning Outcomes Demonstrated
+The `presentation/` folders contain curated code extracts from the working app so each intern can explain a focused slice without editing the production copy.
 
-Through SkillSnap, the interns are expected to demonstrate understanding of:
+## Core data flow
 
-- Translating a business problem into a data model
-- Converting raw job data into structured role requirements
-- Comparing candidate evidence with market expectations
-- Designing interpretable scoring and gap metrics
-- Applying Generative AI with structured outputs and evidence constraints
-- Integrating backend logic with a browser-based interface
-- Maintaining separation between automated analysis and human review
-- Connecting analytics, AI, database, and application development into one end-to-end system
+```text
+skillsnap_job_details
+        ↓
+Target-role requirement aggregation
+        ↓
+Resume extraction + keyword/AI evidence classification
+        ↓
+Existing / Partial / Missing / Not Required
+        ↓
+Readiness analytics + visual resume analysis
+        ↓
+Preparation prescription + company/job matching
+        ↓
+Shared candidate review + job-specific ATS resume
+```
 
-## Mentor Evaluation Perspective
+## Important isolation rule
 
-SkillSnap can be evaluated as an integrated project rather than four unrelated assignments. Each intern owns a different layer, but the value of the project comes from the interaction between those layers.
+Do not change SkillSnap SQL back to `candidates`, `candidate_requirements`, `candidate_activity`, or `job_details`. Those names belong to the original environment. SkillSnap intentionally writes only to `skillsnap_*` tables.
 
-A useful presentation discussion can therefore move from:
+## Architecture map
 
-**market data → candidate evidence → analytics → AI reasoning → application experience**
-
-while allowing each intern to explain the technical decisions within their assigned area.
-
-## Architecture Documentation
-
-The repository includes a dedicated architecture section under `docs/architecture/`. The final architecture map will represent the validated end-to-end SkillSnap flow after application testing is complete.
+A final visual architecture map is intentionally deferred until the server build is validated. Add it under `docs/architecture/` once the live SkillSnap flow has been tested end-to-end.

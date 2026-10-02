@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PHP Architecture Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        window.__ARCH_DATA__ = [{"id":1,"file":"app/actions.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["skillsnap_candidates","skillsnap_candidate_requirements","skillsnap_job_details"],"external_urls":[],"api_keywords":["OpenAI"],"uses_session":false,"uses_mysql":true,"uses_pdo":true,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":true,"uses_cron_hint":false,"line_count":128,"size_kb":15.1300000000000007815970093361102044582366943359375},{"id":2,"file":"app/analysis.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["skillsnap_job_details","skillsnap_candidates","rejection","skillsnap_candidate_requirements"],"external_urls":["https://api.openai.com/v1/responses"],"api_keywords":["OpenAI","cURL External API"],"uses_session":false,"uses_mysql":true,"uses_pdo":true,"uses_mysqli":false,"uses_curl":true,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":true,"line_count":357,"size_kb":28.730000000000000426325641456060111522674560546875},{"id":3,"file":"app/bootstrap.php","includes":[],"form_actions":["?action=admin_login"],"ajax_calls":[],"redirects":[],"sql_tables":["skillsnap_job_details","skillsnap_candidates","skillsnap_candidate_requirements","skillsnap_activity","skillsnap_company_match_cache","skillsnap_company_match_jobs","skillsnap_company_match_runs","skillsnap_company_match_queue"],"external_urls":["https://thetalentgrid.in/plans/","https://www.thetalentgrid.co.in"],"api_keywords":["OpenAI","Mail/SMTP"],"uses_session":true,"uses_mysql":true,"uses_pdo":true,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":true,"uses_file_upload":false,"uses_cron_hint":true,"line_count":313,"size_kb":22.9200000000000017053025658242404460906982421875},{"id":4,"file":"app/planning_matching.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["the","skillsnap_candidates","skillsnap_candidate_requirements","skillsnap_job_details","skillsnap_company_match_runs","skillsnap_company_match_queue","skillsnap_company_match_cache"],"external_urls":[],"api_keywords":["OpenAI"],"uses_session":false,"uses_mysql":true,"uses_pdo":true,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":true,"line_count":344,"size_kb":39.57000000000000028421709430404007434844970703125},{"id":5,"file":"app/views/admin_head.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["resume"],"external_urls":["https://cdn.datatables.net/1.13.10/css/jquery.dataTables.min.css","https://code.jquery.com/jquery-3.7.1.min.js","https://cdn.datatables.net/1.13.10/js/jquery.dataTables.min.js","https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"],"api_keywords":[],"uses_session":false,"uses_mysql":true,"uses_pdo":false,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":false,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":363,"size_kb":28.230000000000000426325641456060111522674560546875},{"id":6,"file":"app/views/admin_script.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["shared","the"],"external_urls":["https://thetalentgrid.in/plans/"],"api_keywords":["OpenAI"],"uses_session":false,"uses_mysql":true,"uses_pdo":false,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":449,"size_kb":37.97999999999999687361196265555918216705322265625},{"id":7,"file":"app/views/public.php","includes":[],"form_actions":[],"ajax_calls":["?action=public_requirement_update","?action=candidate_review_submit"],"redirects":[],"sql_tables":["the","SkillSnap"],"external_urls":["https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js","https://thetalentgrid.in/plans/"],"api_keywords":[],"uses_session":false,"uses_mysql":true,"uses_pdo":false,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":false,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":432,"size_kb":48.97999999999999687361196265555918216705322265625},{"id":8,"file":"config.local.example.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":[],"external_urls":["https://thetalentgrid.in/plans/","https://www.thetalentgrid.co.in"],"api_keywords":["OpenAI"],"uses_session":false,"uses_mysql":false,"uses_pdo":false,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":29,"size_kb":1.149999999999999911182158029987476766109466552734375},{"id":9,"file":"config.local.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":[],"external_urls":["https://thetalentgrid.in/plans/","https://www.thetalentgrid.co.in"],"api_keywords":["OpenAI"],"uses_session":false,"uses_mysql":false,"uses_pdo":false,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":29,"size_kb":1.29000000000000003552713678800500929355621337890625},{"id":10,"file":"index.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":[],"external_urls":[],"api_keywords":[],"uses_session":false,"uses_mysql":false,"uses_pdo":false,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":false,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":15,"size_kb":0.450000000000000011102230246251565404236316680908203125},{"id":11,"file":"presentation/data-analyst/intern-1-market-intelligence/presentation.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["skillsnap_job_details"],"external_urls":[],"api_keywords":[],"uses_session":false,"uses_mysql":true,"uses_pdo":false,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":false,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":72,"size_kb":3.359999999999999875655021241982467472553253173828125},{"id":12,"file":"presentation/data-analyst/intern-2-analytics-matching/presentation.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["skillsnap_candidates","skillsnap_candidate_requirements","skillsnap_job_details"],"external_urls":[],"api_keywords":[],"uses_session":false,"uses_mysql":true,"uses_pdo":true,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":false,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":76,"size_kb":9.410000000000000142108547152020037174224853515625},{"id":13,"file":"presentation/generative-ai/presentation.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["skillsnap_candidates","rejection","skillsnap_job_details"],"external_urls":["https://api.openai.com/v1/responses"],"api_keywords":["OpenAI","cURL External API"],"uses_session":false,"uses_mysql":true,"uses_pdo":true,"uses_mysqli":false,"uses_curl":true,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":true,"line_count":128,"size_kb":17.71000000000000085265128291212022304534912109375},{"id":14,"file":"presentation/web-development/presentation.php","includes":[],"form_actions":[],"ajax_calls":[],"redirects":[],"sql_tables":["skillsnap_candidates","skillsnap_candidate_requirements"],"external_urls":[],"api_keywords":["OpenAI"],"uses_session":true,"uses_mysql":true,"uses_pdo":true,"uses_mysqli":false,"uses_curl":false,"uses_razorpay":false,"uses_openai":true,"uses_whatsapp":false,"uses_google":false,"uses_mail":false,"uses_file_upload":false,"uses_cron_hint":false,"line_count":69,"size_kb":5.20000000000000017763568394002504646778106689453125}];
+        window.__ARCH_SUMMARY__ = {"files":14,"tables":["SkillSnap","rejection","resume","shared","skillsnap_activity","skillsnap_candidate_requirements","skillsnap_candidates","skillsnap_company_match_cache","skillsnap_company_match_jobs","skillsnap_company_match_queue","skillsnap_company_match_runs","skillsnap_job_details","the"],"apis":["Mail/SMTP","OpenAI","cURL External API"],"includes_count":0,"ajax_count":2,"forms_count":1,"redirects_count":0,"session_files":2};
+        window.__ARCH_OVERVIEW_MERMAID__ = "flowchart TD\n    Browser[\"User Browser\"]\n    DB[(\"MySQL Database\")]\n    EXT[\"External Services\"]\n    app_actions_php_cc6eb6[\"app/actions.php\"]\n    app_actions_php_cc6eb6 --> DB\n    app_actions_php_cc6eb6 --> EXT\n    app_analysis_php_59023c[\"app/analysis.php\"]\n    app_analysis_php_59023c --> DB\n    app_analysis_php_59023c --> EXT\n    app_bootstrap_php_52787c[\"app/bootstrap.php\"]\n    Browser --> app_bootstrap_php_52787c\n    app_bootstrap_php_52787c --> DB\n    app_bootstrap_php_52787c --> EXT\n    app_planning_matching_php_0dcc8e[\"app/planning_matching.php\"]\n    app_planning_matching_php_0dcc8e --> DB\n    app_planning_matching_php_0dcc8e --> EXT\n    app_views_admin_head_php_9666df[\"app/views/admin_head.php\"]\n    app_views_admin_head_php_9666df --> DB\n    app_views_admin_script_php_ffe5bf[\"app/views/admin_script.php\"]\n    app_views_admin_script_php_ffe5bf --> DB\n    app_views_admin_script_php_ffe5bf --> EXT\n    app_views_public_php_e56418[\"app/views/public.php\"]\n    app_views_public_php_e56418 --> DB\n    config_local_example_php_676f76[\"config.local.example.php\"]\n    config_local_example_php_676f76 --> EXT\n    config_local_php_66fd82[\"config.local.php\"]\n    config_local_php_66fd82 --> EXT\n    presentation_data_analyst_intern_1_market_intelligence_presentation_php_1f9ab7[\"presentation/data-analyst/intern-1-market-intelligence/presentation.php\"]\n    presentation_data_analyst_intern_1_market_intelligence_presentation_php_1f9ab7 --> DB\n    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b[\"presentation/data-analyst/intern-2-analytics-matching/presentation.php\"]\n    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b --> DB\n    presentation_generative_ai_presentation_php_c93ab3[\"presentation/generative-ai/presentation.php\"]\n    presentation_generative_ai_presentation_php_c93ab3 --> DB\n    presentation_generative_ai_presentation_php_c93ab3 --> EXT\n    presentation_web_development_presentation_php_78a46a[\"presentation/web-development/presentation.php\"]\n    presentation_web_development_presentation_php_78a46a --> DB\n    presentation_web_development_presentation_php_78a46a --> EXT\n";
+        window.__ARCH_FILE_MAPS__ = {"1":"flowchart LR\n    app_actions_php_cc6eb6[\"app/actions.php\"]\n    app_actions_php_cc6eb6 -->|SQL| table_skillsnap_candidates_52cc64[(\"skillsnap_candidates\")]\n    app_actions_php_cc6eb6 -->|SQL| table_skillsnap_candidate_requirements_fb630b[(\"skillsnap_candidate_requirements\")]\n    app_actions_php_cc6eb6 -->|SQL| table_skillsnap_job_details_757b0a[(\"skillsnap_job_details\")]\n    app_actions_php_cc6eb6 -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n","2":"flowchart LR\n    app_analysis_php_59023c[\"app/analysis.php\"]\n    app_analysis_php_59023c -->|SQL| table_skillsnap_job_details_757b0a[(\"skillsnap_job_details\")]\n    app_analysis_php_59023c -->|SQL| table_skillsnap_candidates_52cc64[(\"skillsnap_candidates\")]\n    app_analysis_php_59023c -->|SQL| table_rejection_927eb8[(\"rejection\")]\n    app_analysis_php_59023c -->|SQL| table_skillsnap_candidate_requirements_fb630b[(\"skillsnap_candidate_requirements\")]\n    app_analysis_php_59023c -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n    app_analysis_php_59023c -->|API| api_cURL_External_API_3c160a[\"cURL External API\"]\n","3":"flowchart LR\n    app_bootstrap_php_52787c[\"app/bootstrap.php\"]\n    Browser[\"Browser\"] -->|form submit| app_bootstrap_php_52787c\n    app_bootstrap_php_52787c -->|action| form__action_admin_login_d32562[\"?action=admin_login\"]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_job_details_757b0a[(\"skillsnap_job_details\")]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_candidates_52cc64[(\"skillsnap_candidates\")]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_candidate_requirements_fb630b[(\"skillsnap_candidate_requirements\")]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_activity_46e15d[(\"skillsnap_activity\")]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_company_match_cache_828253[(\"skillsnap_company_match_cache\")]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_company_match_jobs_3e96a0[(\"skillsnap_company_match_jobs\")]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_company_match_runs_74ddb5[(\"skillsnap_company_match_runs\")]\n    app_bootstrap_php_52787c -->|SQL| table_skillsnap_company_match_queue_8d0c12[(\"skillsnap_company_match_queue\")]\n    app_bootstrap_php_52787c -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n    app_bootstrap_php_52787c -->|API| api_Mail_SMTP_1561db[\"Mail/SMTP\"]\n","4":"flowchart LR\n    app_planning_matching_php_0dcc8e[\"app/planning_matching.php\"]\n    app_planning_matching_php_0dcc8e -->|SQL| table_the_65a5f7[(\"the\")]\n    app_planning_matching_php_0dcc8e -->|SQL| table_skillsnap_candidates_52cc64[(\"skillsnap_candidates\")]\n    app_planning_matching_php_0dcc8e -->|SQL| table_skillsnap_candidate_requirements_fb630b[(\"skillsnap_candidate_requirements\")]\n    app_planning_matching_php_0dcc8e -->|SQL| table_skillsnap_job_details_757b0a[(\"skillsnap_job_details\")]\n    app_planning_matching_php_0dcc8e -->|SQL| table_skillsnap_company_match_runs_74ddb5[(\"skillsnap_company_match_runs\")]\n    app_planning_matching_php_0dcc8e -->|SQL| table_skillsnap_company_match_queue_8d0c12[(\"skillsnap_company_match_queue\")]\n    app_planning_matching_php_0dcc8e -->|SQL| table_skillsnap_company_match_cache_828253[(\"skillsnap_company_match_cache\")]\n    app_planning_matching_php_0dcc8e -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n","5":"flowchart LR\n    app_views_admin_head_php_9666df[\"app/views/admin_head.php\"]\n    app_views_admin_head_php_9666df -->|SQL| table_resume_a27cfc[(\"resume\")]\n","6":"flowchart LR\n    app_views_admin_script_php_ffe5bf[\"app/views/admin_script.php\"]\n    app_views_admin_script_php_ffe5bf -->|SQL| table_shared_9f78fe[(\"shared\")]\n    app_views_admin_script_php_ffe5bf -->|SQL| table_the_65a5f7[(\"the\")]\n    app_views_admin_script_php_ffe5bf -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n","7":"flowchart LR\n    app_views_public_php_e56418[\"app/views/public.php\"]\n    app_views_public_php_e56418 -->|AJAX| ajax__action_public_requirement_update_41e974[\"?action=public_requirement_update\"]\n    app_views_public_php_e56418 -->|AJAX| ajax__action_candidate_review_submit_43422e[\"?action=candidate_review_submit\"]\n    app_views_public_php_e56418 -->|SQL| table_the_65a5f7[(\"the\")]\n    app_views_public_php_e56418 -->|SQL| table_SkillSnap_4d1c6f[(\"SkillSnap\")]\n","8":"flowchart LR\n    config_local_example_php_676f76[\"config.local.example.php\"]\n    config_local_example_php_676f76 -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n","9":"flowchart LR\n    config_local_php_66fd82[\"config.local.php\"]\n    config_local_php_66fd82 -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n","10":"flowchart LR\n    index_php_828e00[\"index.php\"]\n","11":"flowchart LR\n    presentation_data_analyst_intern_1_market_intelligence_presentation_php_1f9ab7[\"presentation/data-analyst/intern-1-market-intelligence/presentation.php\"]\n    presentation_data_analyst_intern_1_market_intelligence_presentation_php_1f9ab7 -->|SQL| table_skillsnap_job_details_757b0a[(\"skillsnap_job_details\")]\n","12":"flowchart LR\n    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b[\"presentation/data-analyst/intern-2-analytics-matching/presentation.php\"]\n    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b -->|SQL| table_skillsnap_candidates_52cc64[(\"skillsnap_candidates\")]\n    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b -->|SQL| table_skillsnap_candidate_requirements_fb630b[(\"skillsnap_candidate_requirements\")]\n    presentation_data_analyst_intern_2_analytics_matching_presentation_php_649a8b -->|SQL| table_skillsnap_job_details_757b0a[(\"skillsnap_job_details\")]\n","13":"flowchart LR\n    presentation_generative_ai_presentation_php_c93ab3[\"presentation/generative-ai/presentation.php\"]\n    presentation_generative_ai_presentation_php_c93ab3 -->|SQL| table_skillsnap_candidates_52cc64[(\"skillsnap_candidates\")]\n    presentation_generative_ai_presentation_php_c93ab3 -->|SQL| table_rejection_927eb8[(\"rejection\")]\n    presentation_generative_ai_presentation_php_c93ab3 -->|SQL| table_skillsnap_job_details_757b0a[(\"skillsnap_job_details\")]\n    presentation_generative_ai_presentation_php_c93ab3 -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n    presentation_generative_ai_presentation_php_c93ab3 -->|API| api_cURL_External_API_3c160a[\"cURL External API\"]\n","14":"flowchart LR\n    presentation_web_development_presentation_php_78a46a[\"presentation/web-development/presentation.php\"]\n    presentation_web_development_presentation_php_78a46a -->|SQL| table_skillsnap_candidates_52cc64[(\"skillsnap_candidates\")]\n    presentation_web_development_presentation_php_78a46a -->|SQL| table_skillsnap_candidate_requirements_fb630b[(\"skillsnap_candidate_requirements\")]\n    presentation_web_development_presentation_php_78a46a -->|API| api_OpenAI_ed623a[\"OpenAI\"]\n"};
+    </script>
+
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+            --dark: #111827;
+            --border: #e5e7eb;
+            --blue: #2563eb;
+            --green: #16a34a;
+            --red: #dc2626;
+            --amber: #d97706;
+            --purple: #7c3aed;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .topbar {
+            background: var(--dark);
+            color: #fff;
+            padding: 22px 28px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        }
+
+        .topbar h1 {
+            margin: 0 0 8px;
+            font-size: 24px;
+        }
+
+        .topbar p {
+            margin: 3px 0;
+            color: #d1d5db;
+            font-size: 13px;
+        }
+
+        .wrap {
+            padding: 22px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(160px, 1fr));
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .metric {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .metric .num {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .metric .label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            margin: 0 0 14px;
+            font-size: 20px;
+        }
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(5, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .toolbar input,
+        .toolbar select,
+        .toolbar button {
+            padding: 11px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .toolbar button {
+            background: var(--dark);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 999px;
+            margin: 2px;
+            font-size: 12px;
+            background: #eef2ff;
+            color: #3730a3;
+            white-space: nowrap;
+        }
+
+        .tag.green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .tag.red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tag.amber {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .tag.gray {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .tag.blue {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .list-box {
+            max-height: 180px;
+            overflow: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        .table-wrap {
+            overflow: auto;
+            max-height: 650px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+        }
+
+        th, td {
+            border-bottom: 1px solid var(--border);
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #111827;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        tr:hover td {
+            background: #f9fafb;
+        }
+
+        code {
+            background: #f3f4f6;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .small {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .btn {
+            display: inline-block;
+            border: 0;
+            background: var(--dark);
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .btn.light {
+            background: #f3f4f6;
+            color: #111827;
+        }
+
+        .btn.blue {
+            background: var(--blue);
+        }
+
+        .pager {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 12px;
+        }
+
+        .pager button {
+            border: 1px solid var(--border);
+            background: #fff;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .pager button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .map-box {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #fff;
+            min-height: 260px;
+            overflow: auto;
+            padding: 14px;
+        }
+
+        .map-placeholder {
+            padding: 30px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .warning {
+            padding: 12px 14px;
+            background: #fff7ed;
+            color: #9a3412;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            margin-bottom: 14px;
+        }
+
+        @media(max-width: 1100px) {
+            .grid {
+                grid-template-columns: repeat(2, minmax(160px, 1fr));
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 700px) {
+            .wrap {
+                padding: 12px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <h1>PHP Project Architecture Report</h1>
+        <p><strong>Scanned Folder:</strong> <code>skillsnap</code></p>
+        <p><strong>Server Path:</strong> <code>/home3/hackveda/public_html/skillsnap</code></p>
+        <p><strong>Generated:</strong> 2026-10-02 07:03:33</p>
+    </div>
+
+    <div class="wrap">
+
+        <div class="warning">
+            The full map is not rendered automatically to avoid browser hanging. Use filters or click "View Map" for a specific file.
+        </div>
+
+        <div class="grid">
+            <div class="metric">
+                <div class="num" id="mFiles">0</div>
+                <div class="label">PHP Files Scanned</div>
+            </div>
+            <div class="metric">
+                <div class="num" id="mTables">0</div>
+                <div class="label">Database Tables Detected</div>
+            </div>
+            <div class="metric">
+                <div class="num" id="mApis">0</div>
+                <div class="label">External API Types</div>
+            </div>
+            <div class="metric">
+                <div class="num" id="mSession">0</div>
+                <div class="label">Session-Based Files</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Downloads</h2>
+            <a class="btn" href="architecture-data.json" target="_blank">Open JSON Data</a>
+            <a class="btn light" href="file-maps.json" target="_blank">Open File Maps JSON</a>
+            <a class="btn light" href="overview-map.mmd" target="_blank">Open Overview Mermaid</a>
+        </div>
+
+        <div class="details-grid">
+            <div class="card">
+                <h2>Database Tables</h2>
+                <div id="tablesList" class="list-box"></div>
+            </div>
+
+            <div class="card">
+                <h2>External Services</h2>
+                <div id="apisList" class="list-box"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Lazy Overview Map</h2>
+            <p class="small">This only shows important files and limits nodes to keep browser smooth.</p>
+            <button class="btn blue" onclick="renderOverviewMap()">Render Overview Map</button>
+            <button class="btn light" onclick="clearOverviewMap()">Clear Map</button>
+            <div id="overviewMap" class="map-box" style="margin-top:12px;">
+                <div class="map-placeholder">Click "Render Overview Map" to load the map.</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>File Dependency Explorer</h2>
+
+            <div class="toolbar">
+                <input type="text" id="searchBox" placeholder="Search file, table, API, include, AJAX..." oninput="applyFilters()">
+
+                <select id="filterType" onchange="applyFilters()">
+                    <option value="">All Files</option>
+                    <option value="mysql">Uses MySQL</option>
+                    <option value="session">Uses Session</option>
+                    <option value="api">Uses External API</option>
+                    <option value="ajax">Has AJAX</option>
+                    <option value="form">Has Form</option>
+                    <option value="redirect">Has Redirect</option>
+                    <option value="upload">Uses File Upload</option>
+                    <option value="mail">Uses Mail</option>
+                </select>
+
+                <select id="rowsPerPage" onchange="changeRowsPerPage()">
+                    <option value="25">25 rows</option>
+                    <option value="50" selected>50 rows</option>
+                    <option value="100">100 rows</option>
+                    <option value="200">200 rows</option>
+                </select>
+
+                <button onclick="resetFilters()">Reset</button>
+                <button onclick="exportFilteredJson()">Export Filtered JSON</button>
+                <button onclick="window.print()">Print</button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Dependencies</th>
+                            <th>Forms / AJAX</th>
+                            <th>DB Tables</th>
+                            <th>APIs / Flags</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fileTable"></tbody>
+                </table>
+            </div>
+
+            <div class="pager">
+                <button id="prevBtn" onclick="prevPage()">Previous</button>
+                <span id="pageInfo" class="small"></span>
+                <button id="nextBtn" onclick="nextPage()">Next</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Selected File Map</h2>
+            <p id="selectedFileName" class="small">No file selected.</p>
+            <div id="fileMap" class="map-box">
+                <div class="map-placeholder">Click "View Map" for any file.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let mermaidLoaded = false;
+        let data = window.__ARCH_DATA__ || [];
+        let summary = window.__ARCH_SUMMARY__ || {};
+        let overviewMermaid = window.__ARCH_OVERVIEW_MERMAID__ || "";
+        let fileMaps = window.__ARCH_FILE_MAPS__ || {};
+
+        let filtered = [...data];
+        let currentPage = 1;
+        let rowsPerPage = 50;
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function tag(value, color = "") {
+            if (!value) return "";
+            return `<span class="tag ${color}">${escapeHtml(value)}</span>`;
+        }
+
+        function tags(values, color = "") {
+            if (!values || !values.length) return `<span class="small">None</span>`;
+            return values.slice(0, 12).map(v => tag(v, color)).join(" ") +
+                (values.length > 12 ? tag("+" + (values.length - 12) + " more", "gray") : "");
+        }
+
+        function initMetrics() {
+            document.getElementById("mFiles").textContent = summary.files || data.length || 0;
+            document.getElementById("mTables").textContent = (summary.tables || []).length;
+            document.getElementById("mApis").textContent = (summary.apis || []).length;
+            document.getElementById("mSession").textContent = summary.session_files || 0;
+
+            document.getElementById("tablesList").innerHTML =
+                (summary.tables || []).length
+                    ? summary.tables.map(t => tag(t, "green")).join(" ")
+                    : `<span class="small">No valid database tables detected.</span>`;
+
+            document.getElementById("apisList").innerHTML =
+                (summary.apis || []).length
+                    ? summary.apis.map(a => tag(a, "blue")).join(" ")
+                    : `<span class="small">No external services detected.</span>`;
+        }
+
+        function rowMatchesType(row, type) {
+            if (!type) return true;
+
+            if (type === "mysql") return !!row.uses_mysql;
+            if (type === "session") return !!row.uses_session;
+            if (type === "api") return (row.api_keywords || []).length > 0;
+            if (type === "ajax") return (row.ajax_calls || []).length > 0;
+            if (type === "form") return (row.form_actions || []).length > 0;
+            if (type === "redirect") return (row.redirects || []).length > 0;
+            if (type === "upload") return !!row.uses_file_upload;
+            if (type === "mail") return !!row.uses_mail;
+
+            return true;
+        }
+
+        function rowMatchesSearch(row, q) {
+            if (!q) return true;
+
+            const haystack = [
+                row.file,
+                ...(row.includes || []),
+                ...(row.form_actions || []),
+                ...(row.ajax_calls || []),
+                ...(row.redirects || []),
+                ...(row.sql_tables || []),
+                ...(row.external_urls || []),
+                ...(row.api_keywords || [])
+            ].join(" ").toLowerCase();
+
+            return haystack.includes(q.toLowerCase());
+        }
+
+        function applyFilters() {
+            const q = document.getElementById("searchBox").value.trim();
+            const type = document.getElementById("filterType").value;
+
+            filtered = data.filter(row => rowMatchesType(row, type) && rowMatchesSearch(row, q));
+            currentPage = 1;
+            renderTable();
+        }
+
+        function resetFilters() {
+            document.getElementById("searchBox").value = "";
+            document.getElementById("filterType").value = "";
+            filtered = [...data];
+            currentPage = 1;
+            renderTable();
+        }
+
+        function changeRowsPerPage() {
+            rowsPerPage = parseInt(document.getElementById("rowsPerPage").value, 10) || 50;
+            currentPage = 1;
+            renderTable();
+        }
+
+        function flagTags(row) {
+            let flags = [];
+
+            if (row.uses_session) flags.push(["Session", "amber"]);
+            if (row.uses_mysql) flags.push(["MySQL", "green"]);
+            if (row.uses_pdo) flags.push(["PDO", "green"]);
+            if (row.uses_mysqli) flags.push(["MySQLi", "green"]);
+            if (row.uses_curl) flags.push(["cURL", "blue"]);
+            if (row.uses_razorpay) flags.push(["Razorpay", "blue"]);
+            if (row.uses_openai) flags.push(["OpenAI", "blue"]);
+            if (row.uses_whatsapp) flags.push(["WhatsApp", "blue"]);
+            if (row.uses_google) flags.push(["Google", "blue"]);
+            if (row.uses_mail) flags.push(["Mail", "blue"]);
+            if (row.uses_file_upload) flags.push(["Upload", "amber"]);
+            if (row.uses_cron_hint) flags.push(["Exec/Cron Hint", "red"]);
+
+            if (!flags.length) return `<span class="small">None</span>`;
+
+            return flags.map(([f, c]) => tag(f, c)).join(" ");
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById("fileTable");
+            tbody.innerHTML = "";
+
+            const totalPages = Math.max(1, Math.ceil(filtered.length / rowsPerPage));
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const pageRows = filtered.slice(start, start + rowsPerPage);
+
+            if (!pageRows.length) {
+                tbody.innerHTML = `<tr><td colspan="6"><span class="small">No matching files found.</span></td></tr>`;
+            } else {
+                const frag = document.createDocumentFragment();
+
+                pageRows.forEach(row => {
+                    const tr = document.createElement("tr");
+
+                    tr.innerHTML = `
+                        <td>
+                            <code>${escapeHtml(row.file)}</code><br>
+                            <span class="small">${escapeHtml(row.line_count)} lines | ${escapeHtml(row.size_kb)} KB</span>
+                        </td>
+                        <td>
+                            <strong>Includes:</strong><br>
+                            ${tags(row.includes, "gray")}
+                            <br><br>
+                            <strong>Redirects:</strong><br>
+                            ${tags(row.redirects, "amber")}
+                        </td>
+                        <td>
+                            <strong>Forms:</strong><br>
+                            ${tags(row.form_actions, "blue")}
+                            <br><br>
+                            <strong>AJAX:</strong><br>
+                            ${tags(row.ajax_calls, "blue")}
+                        </td>
+                        <td>${tags(row.sql_tables, "green")}</td>
+                        <td>
+                            <strong>APIs:</strong><br>
+                            ${tags(row.api_keywords, "blue")}
+                            <br><br>
+                            <strong>Flags:</strong><br>
+                            ${flagTags(row)}
+                        </td>
+                        <td>
+                            <button class="btn" onclick="renderFileMap(${Number(row.id)})">View Map</button>
+                            <button class="btn light" onclick="showFileJson(${Number(row.id)})">JSON</button>
+                        </td>
+                    `;
+
+                    frag.appendChild(tr);
+                });
+
+                tbody.appendChild(frag);
+            }
+
+            document.getElementById("pageInfo").textContent =
+                `Showing ${filtered.length ? start + 1 : 0}-${Math.min(start + rowsPerPage, filtered.length)} of ${filtered.length} | Page ${currentPage} of ${totalPages}`;
+
+            document.getElementById("prevBtn").disabled = currentPage <= 1;
+            document.getElementById("nextBtn").disabled = currentPage >= totalPages;
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.max(1, Math.ceil(filtered.length / rowsPerPage));
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+            }
+        }
+
+        function loadMermaid(callback) {
+            if (mermaidLoaded && window.mermaid) {
+                callback();
+                return;
+            }
+
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js";
+            script.onload = function() {
+                mermaidLoaded = true;
+                window.mermaid.initialize({
+                    startOnLoad: false,
+                    securityLevel: "loose",
+                    flowchart: {
+                        useMaxWidth: false,
+                        htmlLabels: true
+                    }
+                });
+                callback();
+            };
+            document.body.appendChild(script);
+        }
+
+        function renderMermaidInto(elementId, code) {
+            const el = document.getElementById(elementId);
+
+            if (!code || code.trim() === "") {
+                el.innerHTML = `<div class="map-placeholder">No map data available.</div>`;
+                return;
+            }
+
+            el.innerHTML = `<div class="map-placeholder">Rendering map...</div>`;
+
+            loadMermaid(async function() {
+                try {
+                    const uniqueId = "mmd_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+                    const result = await window.mermaid.render(uniqueId, code);
+                    el.innerHTML = result.svg;
+                } catch (e) {
+                    el.innerHTML = `
+                        <div class="map-placeholder">
+                            Mermaid could not render this map.<br>
+                            <small>${escapeHtml(e.message || e)}</small>
+                            <pre style="text-align:left; white-space:pre-wrap; max-height:300px; overflow:auto;">${escapeHtml(code)}</pre>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function renderOverviewMap() {
+            renderMermaidInto("overviewMap", overviewMermaid);
+        }
+
+        function clearOverviewMap() {
+            document.getElementById("overviewMap").innerHTML =
+                `<div class="map-placeholder">Click "Render Overview Map" to load the map.</div>`;
+        }
+
+        function renderFileMap(id) {
+            const row = data.find(r => Number(r.id) === Number(id));
+            document.getElementById("selectedFileName").innerHTML = row
+                ? `<strong>Selected:</strong> <code>${escapeHtml(row.file)}</code>`
+                : `No file selected.`;
+
+            const code = fileMaps[String(id)] || "";
+            renderMermaidInto("fileMap", code);
+
+            document.getElementById("fileMap").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function showFileJson(id) {
+            const row = data.find(r => Number(r.id) === Number(id));
+            if (!row) return;
+
+            const win = window.open("", "_blank");
+            win.document.write("<pre>" + escapeHtml(JSON.stringify(row, null, 2)) + "</pre>");
+            win.document.close();
+        }
+
+        function exportFilteredJson() {
+            const blob = new Blob([JSON.stringify(filtered, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "filtered-architecture-data.json";
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            initMetrics();
+            renderTable();
+        });
+    </script>
+</body>
+</html>
